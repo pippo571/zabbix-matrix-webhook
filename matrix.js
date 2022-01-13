@@ -9,6 +9,7 @@ const input = [
   "is_update",
 
   "enable_colors",
+  "http_proxy",
 ]
 
 const update_color = "#000000"
@@ -50,8 +51,8 @@ var Matrix = {
       Matrix.color = recovery_color
     }
 
-    if (typeof params.HTTPProxy === "string" && params.HTTPProxy.trim() !== "") {
-      Matrix.http_proxy = params.HTTPProxy
+    if (typeof HTTPProxy === "string" && HTTPProxy.trim() !== "") {
+      Matrix.http_proxy = input.http_proxy
     }
   },
 
@@ -65,7 +66,7 @@ var Matrix = {
     Zabbix.Log(4, "[Matrix Webhook] new request to: " + url)
 
     if (Matrix.http_proxy != undefined) {
-      request.setProxy(Matrix.http_proxy)
+      request.SetProxy(Matrix.http_proxy)
     }
 
     var blob = request.Post(url, JSON.stringify(payload))
